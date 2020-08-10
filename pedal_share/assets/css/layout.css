@@ -1,0 +1,27 @@
+/* Move down content because we have a fixed navbar that is 3.5rem tall */
+
+
+body {
+  padding-top: 3.5rem;
+}
+
+.bg-dark {
+    background-color:  #1e9b3a!important;
+}
+
+.navbar-dark .navbar-toggler{
+    background-color: #007bff!important;
+}
+
+.btn-outline-success {
+    color: #fff!important;
+    background-color: #007bff!important;
+}
+
+.jumbotron {
+    background-color: #C0C0C0!important;
+}
+
+.h1, h1 {
+    color: #007bff!important;
+}
