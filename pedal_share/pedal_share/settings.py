@@ -78,6 +78,8 @@ TEMPLATES = [
 WSGI_APPLICATION = 'pedal_share.wsgi.application'
 
 
+GOOGLE_API_KEY = ''
+
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
@@ -132,4 +134,4 @@ STATICFILES_DIRS = (
 
 # Captcha Challenge
 
-CAPTCHA_CHALLENGE_FUNCT = 'captcha.helpers.math_challenge'
+CAPTCHA_CHALLENGE_FUNCT = 'captcha.helpers.random_char_challenge'

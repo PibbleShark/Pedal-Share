@@ -9,10 +9,10 @@ from . import forms
 
 def register(request):
     """Register a new custom user profile."""
-    form = forms.CustomUserForm()
+    form = forms.UserForm()
 
     if request.method == 'POST':
-        form = forms.CustomUserForm(request.POST)
+        form = forms.UserForm(request.POST)
         if form.is_valid():
             form.save()
             messages.success(request,
@@ -21,6 +21,6 @@ def register(request):
                                  form.cleaned_data['last_name'],
                              ))
             return HttpResponseRedirect(reverse('home'))
-    return render(request, 'register_form.html', {'form': form})
+    return render(request, 'user_profile/register_form.html', {'form': form})
 
 

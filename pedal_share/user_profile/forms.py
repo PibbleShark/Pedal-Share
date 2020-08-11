@@ -4,8 +4,9 @@ from captcha.fields import CaptchaField
 from . import models
 
 
-class CustomUserForm(forms.ModelForm):
+class UserForm(forms.ModelForm):
     confirm_email = forms.EmailField(required=True)
+    password = forms.CharField(required=True, widget=forms.PasswordInput)
     confirm_password = forms.CharField(required=True, widget=forms.PasswordInput)
     captcha = CaptchaField()
 
@@ -18,9 +19,11 @@ class CustomUserForm(forms.ModelForm):
             'last_name',
             'library_name',
             'message',
-            'address',
+            'street_address',
+            'city',
+            'state',
+            'zip_code',
             'image',
-            'captcha',
         ]
 
     field_order = [
@@ -32,8 +35,12 @@ class CustomUserForm(forms.ModelForm):
         'last_name',
         'library_name',
         'message',
-        'address',
+        'street_address',
+        'city',
+        'state',
+        'zip_code',
         'image',
+        'captcha'
     ]
 
     def clean(self):

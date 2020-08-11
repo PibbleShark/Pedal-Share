@@ -20,8 +20,8 @@ from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from . import views
 
 urlpatterns = [
-    url(r'^user_profiles/', include('user_profiles.urls', namespace='user')),
-    url(r'^ratings/', include('star_ratings.urls', namespace='ratings', app_name='ratings')),
+    url(r'^user_profile/', include('user_profile.urls', namespace='user')),
+    url(r'^ratings/', include('star_ratings.urls', namespace='ratings')),
     url(r'^captcha/', include('captcha.urls')),
     url('admin/', admin.site.urls),
     url(r'^$', views.index, name='home')
