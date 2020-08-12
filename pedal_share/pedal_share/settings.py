@@ -43,8 +43,6 @@ INSTALLED_APPS = [
     #third party
     'bootstrap4',
     'star_ratings',
-    'address',
-    'captcha',
 ]
 
 MIDDLEWARE = [
@@ -77,8 +75,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'pedal_share.wsgi.application'
 
-
-GOOGLE_API_KEY = ''
 
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
@@ -131,6 +127,9 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'assets'),
 )
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # Captcha Challenge
 

@@ -1,14 +1,23 @@
 from django import forms
-from captcha.fields import CaptchaField
 
 from . import models
+
+
+def must_be_empty(value):
+    if value:
+        raise forms.ValidationError('is not empty')
 
 
 class UserForm(forms.ModelForm):
     confirm_email = forms.EmailField(required=True)
     password = forms.CharField(required=True, widget=forms.PasswordInput)
     confirm_password = forms.CharField(required=True, widget=forms.PasswordInput)
-    captcha = CaptchaField()
+    honeypot = forms.CharField(
+        required=False,
+        widget=forms.HiddenInput,
+        label="leave empty",
+        validators=[must_be_empty]
+    )
 
     class Meta:
         model = models.CustomUser
@@ -40,7 +49,6 @@ class UserForm(forms.ModelForm):
         'state',
         'zip_code',
         'image',
-        'captcha'
     ]
 
     def clean(self):

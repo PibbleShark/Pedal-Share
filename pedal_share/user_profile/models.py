@@ -5,6 +5,7 @@ from star_ratings.models import Rating
 
 
 class CustomUser(AbstractBaseUser, PermissionsMixin):
+    """Custom user model."""
     # adapted from https://testdriven.io/blog/django-custom-user-model/
     email = models.EmailField(unique=True)
     password = models.CharField(max_length=15)
@@ -19,14 +20,15 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
         verbose_name='Add a custom message to potential borrowers',
         null=True)
     image = models.ImageField(
+        upload_to='images/',
         verbose_name='upload an image',
-        null=True)
+        blank=True)
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
 
     def __str__(self):
-        return self.email
+        return "{} {}".format(self.first_name, self.last_name)
 
 
 class Ratings(models.Model):

@@ -12,7 +12,7 @@ def register(request):
     form = forms.UserForm()
 
     if request.method == 'POST':
-        form = forms.UserForm(request.POST)
+        form = forms.UserForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
             messages.success(request,

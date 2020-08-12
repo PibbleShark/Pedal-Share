@@ -16,15 +16,21 @@ Including another URLconf
 from django.contrib import admin
 from django.conf.urls import include, url
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+from django.conf.urls.static import static
+from django.conf import settings
+
 
 from . import views
 
 urlpatterns = [
     url(r'^user_profile/', include('user_profile.urls', namespace='user')),
     url(r'^ratings/', include('star_ratings.urls', namespace='ratings')),
-    url(r'^captcha/', include('captcha.urls')),
     url('admin/', admin.site.urls),
     url(r'^$', views.index, name='home')
 ]
 
 urlpatterns += staticfiles_urlpatterns()
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL,
+                          document_root=settings.MEDIA_ROOT)
