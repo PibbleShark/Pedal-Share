@@ -2,8 +2,6 @@ from django.test import TestCase
 from django.contrib.auth import get_user_model
 from django.shortcuts import reverse
 
-from . import models
-
 
 class UserTests(TestCase):
     """Tests for the user model."""
@@ -17,6 +15,10 @@ class UserTests(TestCase):
             first_name='Bruce',
             last_name='Wayne',
             library_name='Bat-gear',
+            street_address='1234 Wayne Manor',
+            city='Gotham City',
+            state='NJ',
+            zip_code='65755',
             message="because I'm batman!",
         )
 
@@ -42,4 +44,10 @@ class UserTests(TestCase):
     def test_register_view(self):
         resp = self.client.get(reverse('user:register'))
         self.assertEqual(resp.status_code, 200)
-        self.assertIn(self.test_user, resp.context['form'])
+        self.assertEqual(self.test_user, resp.context['form'])
+
+    def test_login_view(self):
+        resp = self.client.get(reverse('user:login'))
+        self.assertEqual(resp.status_code, 200)
+        self.assertEqual(self.test_user.email, resp.context['form.email'])
+        self.assertEqual(self.test_user.password, resp.context['form.password'])

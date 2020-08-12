@@ -1,0 +1,16 @@
+{% extends "layout.html" %}
+{% load bootstrap4 %}
+
+
+{% block content %}
+<div class="container">
+      <h1 class="display-3">Login</h1>
+    <form method="post" action="">
+        {% csrf_token %}
+        {% bootstrap_form form %}
+        {% bootstrap_button "login" button_type='submit' %}
+        {% bootstrap_button "register" button_type='link' href="{% url 'user:register' %}" %}
+        {% bootstrap_button "reset password" button_type='link' href="{% url 'user:reset' %}" %}
+    </form>
+{% endblock %}
+</div>

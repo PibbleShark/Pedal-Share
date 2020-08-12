@@ -2,8 +2,8 @@ from django.shortcuts import render
 from django.contrib import messages
 from django.http import HttpResponseRedirect
 from django.urls import reverse
+from django.contrib.auth import authenticate, login
 
-from . import models
 from . import forms
 
 
@@ -24,3 +24,22 @@ def register(request):
     return render(request, 'user_profile/register_form.html', {'form': form})
 
 
+def user_login(request):
+    form = forms.LoginForm()
+
+    if request.method == 'POST':
+        form = forms.LoginForm(request.POST)
+        if form.is_valid():
+            email = form.cleaned_data['email']
+            password = form.cleaned_data['password']
+            user = authenticate(request, email=email, password=password)
+            if user is not None:
+                login(request, user)
+                messages.success(request,
+                                 "Hello {}, your are now logged in".format(str(user)))
+            else:
+                messages.error(request,
+                               """Login Failed\n
+                       you may attempt another login, register, or request a password change"""
+                               )
+    return render(request, 'user_profile/login_form.html', {'form': form})

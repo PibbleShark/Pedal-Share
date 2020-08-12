@@ -65,3 +65,8 @@ class UserForm(forms.ModelForm):
             raise forms.ValidationError(
                 "You need to enter the same password in both fields"
             )
+
+
+class LoginForm(forms.Form):
+    email = forms.EmailField(required=True)
+    password = forms.CharField(required=True, widget=forms.PasswordInput)
