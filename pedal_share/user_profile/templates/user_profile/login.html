@@ -9,8 +9,8 @@
         {% csrf_token %}
         {% bootstrap_form form %}
         {% bootstrap_button "login" button_type='submit' %}
-        {% bootstrap_button "register" button_type='link' href="{% url 'user:register' %}" %}
-        {% bootstrap_button "reset password" button_type='link' href="{% url 'user:reset' %}" %}
     </form>
+        <a href="{% url 'user:register' %}"><button class="btn btn-primary">Register</button></a>
+        <a href="{% url 'user:password_reset' %}"><button class="btn btn-primary">Forgot Password?</button></a>
 {% endblock %}
 </div>

@@ -1,4 +1,5 @@
 from django import forms
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 
 from . import models
 
@@ -8,10 +9,8 @@ def must_be_empty(value):
         raise forms.ValidationError('is not empty')
 
 
-class UserForm(forms.ModelForm):
+class UserForm(UserCreationForm):
     confirm_email = forms.EmailField(required=True)
-    password = forms.CharField(required=True, widget=forms.PasswordInput)
-    confirm_password = forms.CharField(required=True, widget=forms.PasswordInput)
     honeypot = forms.CharField(
         required=False,
         widget=forms.HiddenInput,
@@ -23,7 +22,6 @@ class UserForm(forms.ModelForm):
         model = models.CustomUser
         fields = [
             'email',
-            'password',
             'first_name',
             'last_name',
             'library_name',
@@ -38,8 +36,8 @@ class UserForm(forms.ModelForm):
     field_order = [
         'email',
         'confirm_email',
-        'password',
-        'confirm_password',
+        'password1',
+        'password2',
         'first_name',
         'last_name',
         'library_name',
@@ -66,7 +64,3 @@ class UserForm(forms.ModelForm):
                 "You need to enter the same password in both fields"
             )
 
-
-class LoginForm(forms.Form):
-    email = forms.EmailField(required=True)
-    password = forms.CharField(required=True, widget=forms.PasswordInput)
