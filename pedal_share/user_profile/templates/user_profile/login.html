@@ -10,7 +10,9 @@
         {% bootstrap_form form %}
         {% bootstrap_button "login" button_type='submit' %}
     </form>
-        <a href="{% url 'user:register' %}"><button class="btn btn-primary">Register</button></a>
-        <a href="{% url 'user:password_reset' %}"><button class="btn btn-primary">Forgot Password?</button></a>
+        <div class="button-space">
+            <a href="{% url 'user:register' %}"><button class="btn btn-primary">Register</button></a>
+            <a href="{% url 'user:password_reset' %}"><button class="btn btn-primary">Forgot Password?</button></a>
+        </div>
 {% endblock %}
 </div>

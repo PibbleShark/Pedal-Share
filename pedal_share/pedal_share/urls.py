@@ -26,7 +26,9 @@ urlpatterns = [
     url(r'^user_profile/', include('user_profile.urls', namespace='user')),
     url(r'^ratings/', include('star_ratings.urls', namespace='ratings')),
     url('admin/', admin.site.urls),
-    url(r'^$', views.index, name='home')
+    url(r'^$', views.index, name='home'),
+    url('^', include('django.contrib.auth.urls')),
+
 ]
 
 urlpatterns += staticfiles_urlpatterns()

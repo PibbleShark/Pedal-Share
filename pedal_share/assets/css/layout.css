@@ -25,3 +25,7 @@ body {
 .h1, h1 {
     color: #007bff!important;
 }
+
+.button-space {
+    padding-top: .6rem;
+}
