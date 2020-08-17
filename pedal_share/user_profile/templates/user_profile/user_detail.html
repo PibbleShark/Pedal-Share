@@ -3,27 +3,29 @@
 
 {% block content %}
 <div class="container">
-      <h2 class="display-3">{{ user.get_full_name|title }}</h2>
-    <img src="{{ user.image.url }}" alt="profile picture" width="500" height="600">
-    <ul>
-        <li>
+
+    <img src="{{ user.image.url }}" class="profile-image" alt="profile picture" width="200" height="150">
+    <h3 class="display-3">{{ user.get_full_name|title }}</h3>
+
+
+
             <label>Email Address</label>
             <p>{{ user.email }}</p>
-        </li>
-        <li>
+
+
             <label>Mailing Address</label>
             <p>{{ user.street_address|capfirst }}</p>
             <p>{{ user.city|capfirst }}, {{ user.state|upper }} {{ user.zip_code }}</p>
-        </li>
-        <li>
+
+
             <label>Library</label>
             <a href="#"><p>{{ user.library_name }}</p></a>
             <label>Your Message</label>
             <p>{{ user.message }}</p>
-        </li>
-        <li>
+
+
             <a href="{% url 'user:edit' pk=user.pk %}"><button class="btn btn-primary">Edit Profile</button></a>
-        </li>
-    </ul>
+
+
 {% endblock %}
 </div>
