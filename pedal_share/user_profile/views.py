@@ -1,14 +1,17 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.contrib import messages
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.contrib.auth import authenticate, login
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm
 
+
 from . import forms
+from .models import CustomUser
 
 
-def register(request):
+def register_view(request):
     """Register a new custom user profile."""
     form = forms.UserForm()
 
@@ -29,7 +32,8 @@ def register(request):
     return render(request, 'user_profile/register.html', {'form': form})
 
 
-def login(request):
+def login_view(request):
+    """Login to your user account"""
     form = forms.AuthenticationForm()
 
     if request.method == 'POST':
@@ -49,3 +53,29 @@ def login(request):
                                   you may attempt another login, register, or request a password change"""
                                )
     return render(request, 'user_profile/login.html', {'form': form})
+
+
+@login_required
+def user_detail(request):
+    """User can view the details of their own profile."""
+    user = request.CustomUser.get_profile()
+    return render(request, 'user_profile/user_detail.html', {'user': user})
+
+
+@login_required
+def edit_user(request, pk):
+    """User can edit their own profile."""
+    user = get_object_or_404(CustomUser, pk=pk)
+    form = forms.UserForm(instance=user)
+
+    if request.method == 'POST':
+        form = forms.UserForm(instance=user, data=request.POST)
+        if form.is_valid():
+            form.set_password(form.cleaned_data['password1'])
+            form.save()
+            messages.success(request,
+                             "Thank you {}, your profile has been updated".format(user.get_short_name()))
+            return HttpResponseRedirect(reverse('home'))
+    return render(request, 'user_profile/edit', {'form': form})
+
+

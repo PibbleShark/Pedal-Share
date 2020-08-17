@@ -22,10 +22,11 @@ class UserTests(TestCase):
             message="because I'm batman!",
         )
 
-    def test_create_user(self):
+    def test_register_view(self):
         """Test to make sure that a standard website user is created with my custom user model"""
         # adapted from https://testdriven.io/blog/django-custom-user-model/
-
+        resp = self.client.get(reverse('user:register'))
+        self.assertEqual(resp.status_code, 200)
         self.assertEqual(self.test_user.email, 'bruce.wayne@wayneenterprises.com')
         self.assertTrue(self.test_user.is_active)
         self.assertFalse(self.test_user.is_staff)
@@ -41,13 +42,21 @@ class UserTests(TestCase):
         with self.assertRaises(ValueError):
             self.user.objects.create_user(email='', password="jasontoddRIP")
 
-    def test_register_view(self):
-        resp = self.client.get(reverse('user:register'))
-        self.assertEqual(resp.status_code, 200)
-        self.assertEqual(self.test_user, resp.context['form'])
-
     def test_login_view(self):
+        """Tests user login view and url"""
         resp = self.client.get(reverse('user:login'))
         self.assertEqual(resp.status_code, 200)
         self.assertEqual(self.test_user.email, resp.context['form.email'])
         self.assertEqual(self.test_user.password, resp.context['form.password'])
+
+    def test_user_detail(self):
+        """Tests user detail view and url"""
+        resp = self.client.get(reverse('user:detail'))
+        self.assertEqual(resp.status_code, 200)
+        self.assertEqual(self.test_user, resp.context['user'])
+
+    def test_edit_user(self):
+        """Tests that a user is edited"""
+        resp = self.client.get(reverse('user:edit'))
+        self.assertEqual(resp.status_code, 200)
+        self.assertEqual(self.test_user, resp.context['form'])

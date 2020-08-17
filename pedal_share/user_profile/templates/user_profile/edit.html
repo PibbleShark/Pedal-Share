@@ -1,0 +1,13 @@
+{% extends "layout.html" %}
+{% load bootstrap4 %}
+
+{% block content %}
+<div class="container">
+      <h1 class="display-3">Edit Your Profile</h1>
+    <form method="post" action="" enctype="multipart/form-data">
+        {% csrf_token %}
+        {% bootstrap_form form %}
+        {% buttons submit="Save" reset="Cancel" %}{% endbuttons %}
+    </form>
+{% endblock %}
+</div>
