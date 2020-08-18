@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     #third party
     'bootstrap4',
     'star_ratings',
+    'django_cleanup.apps.CleanupConfig',
 ]
 
 MIDDLEWARE = [
@@ -119,6 +120,8 @@ USE_L10N = True
 
 USE_TZ = True
 
+# Prevent users from changing their own ratings
+STAR_RATINGS_RERATE = False
 
 # Static files (CSS, JavaScript, Images)
 STATIC_URL = '/static/'

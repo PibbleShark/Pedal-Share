@@ -21,7 +21,7 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     zip_code = models.CharField(_('zip code'), max_length=5)
     message = models.TextField(
         _('Add a custom message to potential borrowers'),
-        null=True)
+        default="")
     image = models.ImageField(
         _('upload an image'),
         upload_to='images/',

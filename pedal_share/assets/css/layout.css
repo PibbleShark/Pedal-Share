@@ -1,9 +1,7 @@
 /* Move down content because we have a fixed navbar that is 3.5rem tall */
 
 
-body {
-  padding-top: 3.5rem;
-}
+
 
 .bg-dark {
     background-color:  #1e9b3a!important;
@@ -13,19 +11,49 @@ body {
     background-color: #007bff!important;
 }
 
-.btn-outline-success {
-    color: #fff!important;
-    background-color: #007bff!important;
-}
-
 .jumbotron {
     background-color: #C0C0C0!important;
+}
+
+body {
+    padding-top: 3.5rem;
 }
 
 .h1, h1 {
     color: #007bff!important;
 }
 
+.display-3 {
+    color: #007bff!important;
+    font-size: 1.75rem!important;
+}
+
+label {
+    color: #C0C0C0!important;
+}
+
+.detail {
+    margin-bottom: 0rem;
+}
+
+footer {
+    margin-top: 3.5rem;
+}
+
 .button-space {
     padding-top: .6rem;
 }
+
+.btn-outline-success {
+    color: #fff!important;
+    background-color: #007bff!important;
+}
+
+.btn-primary {
+    margin-top: 1rem;
+}
+
+.profile-image {
+    margin-top: 2rem;
+}
+

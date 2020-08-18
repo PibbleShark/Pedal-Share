@@ -6,26 +6,17 @@
 
     <img src="{{ user.image.url }}" class="profile-image" alt="profile picture" width="200" height="150">
     <h3 class="display-3">{{ user.get_full_name|title }}</h3>
-
-
-
-            <label>Email Address</label>
-            <p>{{ user.email }}</p>
-
-
-            <label>Mailing Address</label>
-            <p>{{ user.street_address|capfirst }}</p>
-            <p>{{ user.city|capfirst }}, {{ user.state|upper }} {{ user.zip_code }}</p>
-
-
-            <label>Library</label>
-            <a href="#"><p>{{ user.library_name }}</p></a>
-            <label>Your Message</label>
-            <p>{{ user.message }}</p>
-
-
-            <a href="{% url 'user:edit' pk=user.pk %}"><button class="btn btn-primary">Edit Profile</button></a>
-
+    <label>Email Address</label>
+    <p class="detail">{{ user.email }}</p>
+    <label>Mailing Address</label>
+    <p class="detail">{{ user.street_address|capfirst }}</p>
+    <p class="detail">{{ user.city|capfirst }}, {{ user.state|upper }} {{ user.zip_code }}</p>
+    <label>Library</label>
+    <a href="#"><p>{{ user.library_name }}</p></a>
+    <label>Your Message</label>
+    <p class="detail">{{ user.message }}</p>
+    <a href="{% url 'user:edit' %}"><button class="btn btn-primary">Edit Profile</button></a>
+    <a href="{% url 'user:password_reset' %}"><button class="btn btn-primary">Change Password</button></a>
 
 {% endblock %}
 </div>

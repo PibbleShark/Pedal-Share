@@ -8,7 +8,6 @@ from django.contrib.auth.forms import AuthenticationForm
 
 
 from . import forms
-from .models import CustomUser
 
 
 def register_view(request):
@@ -60,19 +59,18 @@ def user_detail(request):
 
 
 @login_required
-def edit_user(request, pk):
+def edit_user(request):
     """User can edit their own profile."""
-    user = get_object_or_404(CustomUser, pk=pk)
-    form = forms.UserForm(instance=user)
+    user = request.user
+    form = forms.EditForm(instance=user)
 
     if request.method == 'POST':
-        form = forms.UserForm(instance=user, data=request.POST)
+        form = forms.EditForm(request.POST, request.FILES, instance=user)
         if form.is_valid():
-            form.set_password(request.POST['password'])
             form.save()
             messages.success(request,
-                             "Thank you {}, your profile has been updated".format(user.get_short_name()))
-            return HttpResponseRedirect(reverse('home'))
-    return render(request, 'user_profile/edit', {'form': form})
+                             "Thank you {}, your profile has been updated".format(user.get_full_name()))
+            return HttpResponseRedirect(reverse('user:detail'))
+    return render(request, 'user_profile/edit.html', {'form': form})
 
 

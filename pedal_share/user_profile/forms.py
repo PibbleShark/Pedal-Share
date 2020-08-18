@@ -64,3 +64,26 @@ class UserForm(UserCreationForm):
                 "You need to enter the same password in both fields"
             )
 
+
+class EditForm(forms.ModelForm):
+    honeypot = forms.CharField(
+        required=False,
+        widget=forms.HiddenInput,
+        label="leave empty",
+        validators=[must_be_empty]
+    )
+
+    class Meta:
+        model = models.CustomUser
+        fields = [
+            'email',
+            'first_name',
+            'last_name',
+            'library_name',
+            'message',
+            'street_address',
+            'city',
+            'state',
+            'zip_code',
+            'image',
+        ]
