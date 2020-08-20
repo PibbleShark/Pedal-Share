@@ -28,7 +28,6 @@ urlpatterns = [
     url('admin/', admin.site.urls),
     url(r'^$', views.index, name='home'),
     url('^', include('django.contrib.auth.urls')),
-
 ]
 
 urlpatterns += staticfiles_urlpatterns()

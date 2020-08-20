@@ -1,10 +1,9 @@
 from django.core.mail import send_mail
 from django.db import models
-from django.contrib.contenttypes.fields import GenericRelation
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
 from django.utils.translation import ugettext_lazy as _
+from star_ratings.models import AbstractBaseRating
 
-from star_ratings.models import Rating
 
 from .managers import CustomUserManager
 
@@ -52,11 +51,10 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
         send_mail(subject, message, from_email, [self.email], **kwargs)
 
 
-class Ratings(models.Model):
+class UserRatings(AbstractBaseRating):
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
-    rating = GenericRelation(Rating, related_query_name='user')
-
-
-
-
-
+    comments = models.TextField(
+        _('comments'),
+        max_length=115,
+        blank=True
+    )

@@ -1,5 +1,7 @@
 from django import forms
-from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.contrib.auth.forms import UserCreationForm
+from star_ratings.forms import CreateUserRatingForm
+
 
 from . import models
 
@@ -87,3 +89,15 @@ class EditForm(forms.ModelForm):
             'zip_code',
             'image',
         ]
+
+
+class RatingForm(CreateUserRatingForm):
+    honeypot = forms.CharField(
+        required=False,
+        widget=forms.HiddenInput,
+        label="leave empty",
+        validators=[must_be_empty]
+    )
+
+    class Meta:
+        model = models.UserRatings

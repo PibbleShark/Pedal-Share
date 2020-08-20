@@ -7,7 +7,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm
 
 
-from . import forms
+from . import forms, models
 
 
 def register_view(request):
@@ -30,7 +30,7 @@ def register_view(request):
 
 def login_view(request):
     """Login to your user account"""
-    form = forms.AuthenticationForm()
+    form = AuthenticationForm()
 
     if request.method == 'POST':
         form = AuthenticationForm(request.POST)
@@ -74,3 +74,18 @@ def edit_user(request):
     return render(request, 'user_profile/edit.html', {'form': form})
 
 
+@login_required
+def rate_user(request, pk):
+    """One user can rate their experience with another user."""
+    user = get_object_or_404(models.CustomUser, pk=pk)
+    form = forms.RatingForm()
+
+    if request.method == 'POST':
+        form = forms.RatingForm(request.POST)
+        if form.is_valid():
+            rating = form.save(commit=False)
+            rating.user = user
+            rating.save()
+            messages.add_message(request, messages.SUCCESS, "Thank you for your feedback!")
+            return HttpResponseRedirect(reverse('home'))
+    return render(request, 'user_profile/rate_user.html', {'form': form, 'user': user})

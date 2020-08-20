@@ -69,6 +69,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'django.core.context_processors.request',
             ],
         },
     },
@@ -120,8 +121,10 @@ USE_L10N = True
 
 USE_TZ = True
 
-# Prevent users from changing their own ratings
+# Star ratings settings
 STAR_RATINGS_RERATE = False
+STAR_RATINGS_ANONYMOUS = True
+STAR_RATINGS_RATING_MODEL = 'user_profile.UserRatings'
 
 # Static files (CSS, JavaScript, Images)
 STATIC_URL = '/static/'
