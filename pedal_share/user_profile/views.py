@@ -1,3 +1,4 @@
+from django.core.exceptions import ObjectDoesNotExist
 from django.shortcuts import render, get_object_or_404
 from django.contrib import messages
 from django.http import HttpResponseRedirect
@@ -55,7 +56,12 @@ def login_view(request):
 def user_detail(request):
     """User can view the details of their own profile."""
     user = request.user
-    return render(request, 'user_profile/user_detail.html', {'user': user})
+    try:
+        rating = models.UserRatings.objects.get(user=user)
+    except ObjectDoesNotExist:
+        rating = None
+    return render(request, 'user_profile/user_detail.html', {'user': user, 'rating': rating})
+# may need to change rating to rating.average
 
 
 @login_required

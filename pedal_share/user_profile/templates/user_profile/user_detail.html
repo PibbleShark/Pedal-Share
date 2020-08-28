@@ -1,11 +1,15 @@
 {% extends "layout.html" %}
 {% load bootstrap4 %}
+{% load ratings %}
 
 {% block content %}
 <div class="container">
 
     <img src="{{ user.image.url }}" class="profile-image" alt="profile picture" width="200" height="150">
     <h3 class="display-3">{{ user.get_full_name|title }}</h3>
+    {% if rating is not none %}
+        <a href="#">{% ratings rating %}</a>
+    {% endif %}
     <label>Email Address</label>
     <p class="detail">{{ user.email }}</p>
     <label>Mailing Address</label>

@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     #local
     'user_profile',
+    'equipment',
     #third party
     'bootstrap4',
     'star_ratings',
