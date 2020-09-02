@@ -23,6 +23,7 @@ from django.conf import settings
 from . import views
 
 urlpatterns = [
+    url(r'^equipment/', include('equipment.urls', namespace='equipment')),
     url(r'^user_profile/', include('user_profile.urls', namespace='user')),
     url(r'^ratings/', include('star_ratings.urls', namespace='ratings')),
     url('admin/', admin.site.urls),

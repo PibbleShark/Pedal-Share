@@ -6,6 +6,7 @@ from django.urls import reverse
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm
+from django.conf import settings
 
 
 from . import forms, models
@@ -83,14 +84,15 @@ def edit_user(request):
 @login_required
 def rate_user(request, pk):
     """One user can rate their experience with another user."""
-    user = get_object_or_404(models.CustomUser, pk=pk)
+    user = get_object_or_404(settings.AUTH_USER_MODEL, pk=pk)
     form = forms.RatingForm()
 
     if request.method == 'POST':
         form = forms.RatingForm(request.POST)
         if form.is_valid():
             rating = form.save(commit=False)
-            rating.user = user
+            #make sure this view connects the rating to the user
+
             rating.save()
             messages.add_message(request, messages.SUCCESS, "Thank you for your feedback!")
             return HttpResponseRedirect(reverse('home'))

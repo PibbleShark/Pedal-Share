@@ -100,4 +100,5 @@ class RatingForm(CreateUserRatingForm):
     )
 
     class Meta:
-        model = models.UserRatings
+        model = models.UserRatings,
+        exclude = []

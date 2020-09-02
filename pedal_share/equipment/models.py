@@ -1,12 +1,11 @@
 from django.db import models
+from django.conf import settings
 from django.utils.translation import ugettext_lazy as _
-
-from ..user_profile import models as user_model
 
 
 class Equipment(models.Model):
     """Model for users to show details about their gear."""
-    user = models.ForeignKey(user_model.CustomUser, on_delete=models.CASCADE)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     device_name = models.CharField(_('device name'), max_length=115)
     type = models.CharField(_('primary device type'), max_length=20)
     secondary_type = models.CharField(_('secondary type (optional)'),
