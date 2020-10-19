@@ -91,14 +91,14 @@ class EditForm(forms.ModelForm):
         ]
 
 
-class RatingForm(CreateUserRatingForm):
-    honeypot = forms.CharField(
-        required=False,
-        widget=forms.HiddenInput,
-        label="leave empty",
-        validators=[must_be_empty]
-    )
+#class RatingForm(CreateUserRatingForm):
+    #honeypot = forms.CharField(
+        #required=False,
+        #widget=forms.HiddenInput,
+        #label="leave empty",
+        #validators=[must_be_empty]
+    #)
 
-    class Meta:
-        model = models.UserRatings,
-        exclude = []
+    #class Meta:
+        #model = models.UserRatings,
+        #exclude = []
